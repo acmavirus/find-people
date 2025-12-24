@@ -1,64 +1,83 @@
-# 🔍 Tool Đếm Người Trong Ảnh
+# 🔍 Tool Đếm Khuôn Mặt Trong Ảnh
 
-Ứng dụng GUI sử dụng AI (YOLOv8) để phát hiện và đếm số người xuất hiện trong ảnh.
+Ứng dụng GUI sử dụng AI (YOLOv8) để phát hiện và đếm số khuôn mặt trong ảnh.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
 ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-green.svg)
 
-## ✨ Tính năng
+## 🔄 Sơ đồ hoạt động
 
-- 📷 Hỗ trợ nhiều định dạng ảnh: JPG, PNG, BMP, GIF, WebP
-- 🤖 Sử dụng YOLOv8 - model AI tiên tiến để phát hiện người
-- 🔢 Đánh số thứ tự cho mỗi người được phát hiện
-- 🎨 Giao diện GUI đẹp mắt, dễ sử dụng
-- ⚡ Xử lý nhanh, hỗ trợ cả CPU và GPU
-
-## 📋 Yêu cầu
-
-- Python 3.10 trở lên
-- Windows / macOS / Linux
-
-## 🚀 Cài đặt
-
-1. **Clone hoặc download project**
-
-2. **Cài đặt dependencies:**
-```bash
-pip install -r requirements.txt
+```mermaid
+flowchart TD
+    A["🖱️ Double-click FaceCounter.exe"] --> B["� Giải nén files<br/>(~5-10 giây)"]
+    B --> C["�🔄 Splash Screen<br/>Loading Animation"]
+    C --> D{"⏳ Tải AI Model<br/>YOLOv8"}
+    D --> E["🖼️ Main App<br/>Giao diện chính"]
+    E --> F["📁 Chọn Ảnh"]
+    F --> G["🤖 AI Phát hiện<br/>Khuôn mặt"]
+    G --> H["🔢 Đánh số<br/>từng khuôn mặt"]
+    H --> I["✅ Hiển thị kết quả"]
+    I --> F
+    
+    style A fill:#e94560,color:#fff
+    style B fill:#ff9f43,color:#000
+    style C fill:#ffd93d,color:#000
+    style D fill:#4ecdc4,color:#000
+    style E fill:#1a1a2e,color:#fff
+    style I fill:#4ecca3,color:#000
 ```
 
-3. **Chạy ứng dụng:**
+> ⚠️ **Lưu ý**: Bước "Giải nén files" là do PyInstaller `--onefile` mode cần giải nén ~343MB vào thư mục tạm trước khi chạy. Lần chạy sau sẽ nhanh hơn nếu files đã được cache.
+
+## ✨ Tính năng
+
+- 📷 Hỗ trợ: JPG, PNG, BMP, GIF, WebP
+- 🤖 AI YOLOv8 phát hiện khuôn mặt
+- 🔢 Đánh số thứ tự cho mỗi khuôn mặt
+- 🎨 Giao diện Dark theme đẹp mắt
+- 🔄 Splash screen loading animation
+- ⚡ Hỗ trợ CPU và GPU
+
+## 🚀 Sử dụng
+
+### Cách 1: Chạy file EXE (Khuyên dùng)
+```
+Double-click file: dist/FaceCounter.exe
+```
+
+### Cách 2: Chạy từ Python
 ```bash
+pip install -r requirements.txt
 python main.py
 ```
 
-## 📖 Hướng dẫn sử dụng
+## 📖 Hướng dẫn
 
-1. Chạy ứng dụng bằng lệnh `python main.py`
-2. Đợi model AI load xong (hiển thị "Sẵn sàng!")
-3. Click nút **"Chọn Ảnh"** để chọn ảnh cần phân tích
-4. Kết quả sẽ hiển thị:
-   - Mỗi người được bao quanh bởi khung màu
-   - Số thứ tự (1, 2, 3...) trên mỗi người
-   - Tổng số người ở góc phải
+1. Double-click `FaceCounter.exe`
+2. Đợi splash screen loading
+3. Click **"Chọn Ảnh"**
+4. Xem kết quả với số thứ tự trên mỗi khuôn mặt
 
-## 🛠️ Cấu trúc Project
+## 🛠️ Cấu trúc
 
 ```
 tool-find-human/
-├── main.py              # Entry point
+├── main.py              # Entry point + Splash screen
 ├── app.py               # GUI Tkinter
-├── person_detector.py   # YOLOv8 detection
+├── person_detector.py   # Face detection
+├── splash_screen.py     # Splash screen module
 ├── requirements.txt     # Dependencies
-└── README.md            # Hướng dẫn
+├── dist/
+│   └── FaceCounter.exe  # Standalone EXE
+└── README.md
 ```
 
 ## 📝 Ghi chú
 
-- Lần đầu chạy sẽ tự động download model YOLOv8 (~6MB)
-- Cần kết nối internet cho lần đầu chạy
-- Nếu có GPU NVIDIA + CUDA, ứng dụng sẽ tự động sử dụng GPU
+- Lần đầu chạy sẽ download model YOLOv8 (~6MB)
+- EXE có dung lượng ~343MB (bao gồm Python + AI)
 
 ## 📄 License
 
 MIT License
+
